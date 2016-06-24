@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <header class="header">
+<pre> ██▀███  ▄▄▄█████▓ ▄▄▄▄    ███▄ ▄███▓
+▓██ ▒ ██▒▓  ██▒ ▓▒▓█████▄ ▓██▒▀█▀ ██▒
+▓██ ░▄█ ▒▒ ▓██░ ▒░▒██▒ ▄██▓██    ▓██░
+▒██▀▀█▄  ░ ▓██▓ ░ ▒██░█▀  ▒██    ▒██
+░██▓ ▒██▒  ▒██▒ ░ ░▓█  ▀█▓▒██▒   ░██▒
+░ ▒▓ ░▒▓░  ▒ ░░   ░▒▓███▀▒░ ▒░   ░  ░
+░▒ ░ ▒░    ░    ▒░▒   ░ ░  ░      ░
+░░   ░   ░       ░    ░ ░      ░
+░               ░             ░</pre>
+    <h1>Read The Bloody Manual - Web Developers' Space</h1>
+  </header>
+
+  <rtbm-search (onKeyup)="articlesActions.setFilter($event)"></rtbm-search>
+
+  <rtbm-list>
+    <div *ngFor="let item of (list$ | async)" class="item" (click)="open(item.url)">
+      <h2>{{item.name}}</h2>
+      <div>{{item.url}} @
+        <time>{{item.createdAt}}</time>
+      </div>
+    </div>
+  </rtbm-list>
+
+  <footer class="footer">
+    <small><i>&copy; 2016 :: bugs by nature ::<a href="mailto:webmaster@rtbm.space">feel free to @contact</a></i>
+    </small>
+  </footer>
+</div>

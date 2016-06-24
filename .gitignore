@@ -1,0 +1,5 @@
+.idea
+typings
+*.log
+public
+node_modules
