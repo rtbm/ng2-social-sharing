@@ -21,6 +21,7 @@
         <time>{{item.createdAt}}</time>
       </div>
     </div>
+    <h2 *ngIf="!(isPending$ | async) && !(list$ | async).length">Sadly, not found :(</h2>
   </rtbm-list>
 
   <footer class="footer">

@@ -7,6 +7,9 @@ export class ServerService {
   private baseUrl = '';
 
   constructor(private http: Http) {
+    if(__DEV__) {
+      this.baseUrl = 'http://localhost:3000';
+    }
   }
 
   get(path): Observable<Response> {

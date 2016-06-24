@@ -15,11 +15,13 @@
   "author": "Marcin Bogusz <marcin@bogusz.cc>",
   "license": "MIT",
   "dependencies": {
+    "compression": "^1.6.2",
     "cors": "^2.7.1",
     "cross-env": "^1.0.8",
-    "express": "~4.13.4",
+    "express": "~4.14.0",
     "mongoose": "^4.5.1",
     "morgan": "^1.7.0",
+    "redis": "^2.6.2",
     "winston": "^2.2.0"
   },
   "devDependencies": {
@@ -29,7 +31,7 @@
     "@angular/http": "2.0.0-rc.3",
     "@angular/platform-browser": "2.0.0-rc.3",
     "@angular/platform-browser-dynamic": "2.0.0-rc.3",
-    "@angular/router": "^3.0.0-alpha.7",
+    "@angular/router": "^3.0.0-alpha.8",
     "@angular/upgrade": "2.0.0-rc.3",
     "angular2-in-memory-web-api": "0.0.12",
     "angular2-jwt": "^0.1.16",
@@ -49,7 +51,7 @@
     "less-loader": "^2.2.3",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
-    "ng2-redux": "^3.0.8-beta.2",
+    "ng2-redux": "^3.1.0",
     "raw-loader": "^0.5.1",
     "redux": "^3.5.2",
     "redux-localstorage": "^0.4.1",

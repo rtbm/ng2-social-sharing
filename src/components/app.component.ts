@@ -19,14 +19,15 @@ import { Observable } from 'rxjs/Rx';
 })
 
 export class RtbmAppComponent {
+  private isPending$: Observable<boolean>;
   private list$: Observable<any>;
 
   constructor(private articlesActions: ArticlesActions, ngRedux: NgRedux<IAppState>) {
     ngRedux.configureStore(rootReducer, {}, middlewares);
     articlesActions.fetch();
 
-    this.list$ = ngRedux.select(state => state.articles.get('list'))
-      .map(list => list.toJS());
+    this.isPending$ = ngRedux.select(state => state.articles.get('isPending'));
+    this.list$ = ngRedux.select(state => state.articles.get('list')).map(list => list.toJS());
   }
 
   open(url) {
