@@ -9,6 +9,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { NgRedux } from 'ng2-redux';
 import { ServerService } from './services/server.service';
 import { ArticlesActions } from './actions/articles.actions';
+import { ArticleFormActions } from './actions/articleForm.actions';
 import { RtbmAppComponent } from './components/app.component';
 
 declare let __PRODUCTION__: any;
@@ -24,4 +25,5 @@ bootstrap(RtbmAppComponent, [
   NgRedux,
   ServerService,
   ArticlesActions,
+  ArticleFormActions,
 ]);

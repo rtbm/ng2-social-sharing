@@ -16,4 +16,9 @@ export class ServerService {
     return this.http.get(`${this.baseUrl}${path}`, {})
       .map((res: Response) => res.json());
   }
+
+  post(path, body): Observable<Response> {
+    return this.http.post(`${this.baseUrl}${path}`, body, {})
+      .map((res: Response) => res.json());
+  }
 }

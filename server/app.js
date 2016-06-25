@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const compression = require('compression');
 const winston = require('winston');
 const logger = require('./utils/logger');
+const bodyParser = require('body-parser');
 
 const app = express();
 const distPath = path.join(__dirname, '../public');
@@ -23,6 +24,10 @@ app.use(express.static(distPath, {
 }));
 
 app.use(compression());
+
+app.use(bodyParser.json({
+  limit: '1kb',
+}));
 
 app.use('/api/articles', require('./routes/articles'));
 app.use('*', (req, res) => res.sendFile(path.join(distPath, 'index.html')));

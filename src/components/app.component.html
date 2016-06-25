@@ -12,6 +12,8 @@
     <h1>Read The Bloody Manual - Web Developers' Space</h1>
   </header>
 
+  <button (click)="articleFormActions.showForm()">foo</button>
+
   <rtbm-search (onKeyup)="articlesActions.setFilter($event)"></rtbm-search>
 
   <rtbm-list>
@@ -28,4 +30,7 @@
     <small><i>&copy; 2016 :: bugs by nature ::<a href="mailto:webmaster@rtbm.space">feel free to @contact</a></i>
     </small>
   </footer>
+
+  <rtbm-submission *ngIf="isModalFormVisible$ | async" (onSubmit)="handleSubmit($event)" (onCancel)="handleCancel()">
+  </rtbm-submission>
 </div>
