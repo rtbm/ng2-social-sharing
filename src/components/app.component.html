@@ -1,22 +1,19 @@
-<div class="wrapper">
-  <header class="header">
-<pre> ██▀███  ▄▄▄█████▓ ▄▄▄▄    ███▄ ▄███▓
-▓██ ▒ ██▒▓  ██▒ ▓▒▓█████▄ ▓██▒▀█▀ ██▒
-▓██ ░▄█ ▒▒ ▓██░ ▒░▒██▒ ▄██▓██    ▓██░
-▒██▀▀█▄  ░ ▓██▓ ░ ▒██░█▀  ▒██    ▒██
-░██▓ ▒██▒  ▒██▒ ░ ░▓█  ▀█▓▒██▒   ░██▒
-░ ▒▓ ░▒▓░  ▒ ░░   ░▒▓███▀▒░ ▒░   ░  ░
-░▒ ░ ▒░    ░    ▒░▒   ░ ░  ░      ░
-░░   ░   ░       ░    ░ ░      ░
-░               ░             ░</pre>
-    <h1>Read The Bloody Manual - Web Developers' Space</h1>
-  </header>
+<header>
+  <rtbm-wrapper>
+    <rtbm-logo></rtbm-logo>
+  </rtbm-wrapper>
+</header>
 
-  <button (click)="articleFormActions.showForm()">foo</button>
+<rtbm-header>
+  <rtbm-wrapper>
+    <button (click)="articleFormActions.showForm()">Submit content proposal</button>
+    <rtbm-search (onKeyup)="articlesActions.setFilter($event)"></rtbm-search>
+  </rtbm-wrapper>
+</rtbm-header>
 
-  <rtbm-search (onKeyup)="articlesActions.setFilter($event)"></rtbm-search>
-
-  <rtbm-list>
+<rtbm-list>
+  <rtbm-wrapper>
+    <rtbm-spinner *ngIf="(isPending$ | async)"></rtbm-spinner>
     <div *ngFor="let item of (list$ | async)" class="item" (click)="open(item.url)">
       <h2>{{item.name}}</h2>
       <div>{{item.url}} @
@@ -24,13 +21,12 @@
       </div>
     </div>
     <h2 *ngIf="!(isPending$ | async) && !(list$ | async).length">Sadly, not found :(</h2>
-  </rtbm-list>
+  </rtbm-wrapper>
+</rtbm-list>
 
-  <footer class="footer">
-    <small><i>&copy; 2016 :: bugs by nature ::<a href="mailto:webmaster@rtbm.space">feel free to @contact</a></i>
-    </small>
-  </footer>
+<footer class="footer">
+  <small><i>&copy; 2016 :: bugs by nature ::<a href="mailto:webmaster@rtbm.space">feel free to @contact</a></i>
+  </small>
+</footer>
 
-  <rtbm-submission *ngIf="isModalFormVisible$ | async" (onSubmit)="handleSubmit($event)" (onCancel)="handleCancel()">
-  </rtbm-submission>
-</div>
+<rtbm-submission *ngIf="isModalFormVisible$ | async"></rtbm-submission>

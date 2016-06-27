@@ -20,7 +20,7 @@ export function articleFormReducer(state: IArticleForm = INITIAL_STATE, action: 
         isError: false,
       });
     }
-    case 'ARTICLES_FORM_ERROR':
+    case 'ARTICLE_FORM_ERROR':
     {
       return state.merge({
         isPending: false,
@@ -36,10 +36,17 @@ export function articleFormReducer(state: IArticleForm = INITIAL_STATE, action: 
       });
     }
     case 'ARTICLE_FORM_SHOW': {
-      return state.set('isModalVisible', true);
+      return state.merge({
+        isPending: false,
+        isSuccess: false,
+        isError: false,
+        isModalVisible: true
+      });
     }
     case 'ARTICLE_FORM_HIDE': {
-      return state.set('isModalVisible', false);
+      return state.merge({
+        isModalVisible: false
+      });
     }
     default:
     {

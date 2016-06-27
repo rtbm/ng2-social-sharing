@@ -1,6 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, ControlGroup, Control, Validators } from '@angular/common';
+import { Component } from '@angular/core';
+import { ControlGroup, Control, Validators } from '@angular/common';
 import { RtbmOverlayComponent } from './overlay.component';
+import { ArticleFormActions } from '../actions/articleForm.actions';
+import { select } from 'ng2-redux';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'rtbm-submission',
@@ -9,28 +12,29 @@ import { RtbmOverlayComponent } from './overlay.component';
   directives: [RtbmOverlayComponent],
 })
 export class RtbmSubmissionComponent {
-  @Output() onSubmit = new EventEmitter();
-  @Output() onCancel = new EventEmitter();
+  @select(state => state.articleForm.get('isPending')) private isPending$: Observable<boolean>;
+  @select(state => state.articleForm.get('isSuccess')) private isSuccess$: Observable<boolean>;
+  @select(state => state.articleForm.get('isError')) private isError$: Observable<boolean>;
 
   private form: ControlGroup;
   private name: Control;
   private url: Control;
 
-  constructor() {
+  constructor(private articleFormActions: ArticleFormActions) {
+    this.url = new Control('https://', Validators.required);
     this.name = new Control('', Validators.required);
-    this.url = new Control('', Validators.required);
     this.form = new ControlGroup({
-      name: this.name,
       url: this.url,
+      name: this.name,
     });
   }
 
-  handleSubmit() {
-    this.onSubmit.emit(this.form.value);
+  handleSubmit(payload) {
+    this.articleFormActions.save(this.form.value);
   }
 
   handleCancel($event) {
     $event.preventDefault();
-    this.onCancel.emit($event);
+    this.articleFormActions.hideForm();
   }
 }

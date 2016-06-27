@@ -9,6 +9,9 @@ export class RtbmSearchComponent {
   private query: string = '';
   @Output() private onKeyup = new EventEmitter();
 
+  constructor() {
+  }
+
   handleOnKeyup() {
     this.onKeyup.emit(this.query);
   }

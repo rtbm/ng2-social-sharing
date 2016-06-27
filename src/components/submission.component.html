@@ -1,20 +1,26 @@
 <rtbm-overlay>
   <div class="inner">
-    <form [ngFormModel]="form" (submit)="handleSubmit()">
+    <form [ngFormModel]="form" (submit)="handleSubmit()" *ngIf="!(isSuccess$ | async)">
       <div class="form-group">
-        <label>Site URL (HTTPS preferred)<em>*</em></label>
+        <label>Site URL<em>*</em></label>
         <input type="text" ngControl="url" placeholder="(required)" />
         <div class="form-error" *ngIf="!url.valid && url.touched">Field is required</div>
       </div>
       <div class="form-group">
-        <label>Short description<em>*</em></label>
+        <label>Short (few words) description<em>*</em></label>
         <input type="text" ngControl="name" placeholder="(required)" />
         <div class="form-error" *ngIf="!name.valid && name.touched">Field is required</div>
       </div>
       <div class="form-actions">
+        <p *ngIf="(isError$ | async)">Error occured :/ Try again!</p>
         <button (click)="handleCancel($event)">Cancel</button>
-        <button type="submit" [disabled]="!url.valid || !name.valid">Submit</button>
+        <button type="submit" [disabled]="!url.valid || !name.valid || (isPending$ | async)">Submit</button>
       </div>
     </form>
+
+    <div *ngIf="(isSuccess$ | async)">
+      <p>Content sucessfully submited :) Thanks!</p>
+      <button (click)="handleCancel($event)">Close</button>
+    </div>
   </div>
 </rtbm-overlay>

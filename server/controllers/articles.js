@@ -46,8 +46,8 @@ module.exports = {
       if (err) return next(err);
 
       const token = md5(config.secret + article._id);
-      redisClient.set(token, article._id);
-      
+      redisClient.set(token, article._id.toString());
+
       const body = `
         <p>
           ${validator.escape(req.body.name)}<br />
@@ -58,9 +58,9 @@ module.exports = {
           <a href="${config.baseUrl}api/articles/reject/${token}">Reject</a>
         </p>
       `;
-      
+
       mailer.send(config.adminEmail, '[RTBM.space] New submission', body);
-      
+
       return res.json(article);
     });
   },
@@ -88,6 +88,7 @@ module.exports = {
         doc.save((err, doc) => {
           if (err) return next(err);
           redisClient.del(req.params.token);
+          redisClient.del('articles');
           return res.json(doc);
         });
       });
