@@ -16,8 +16,9 @@ module.exports = {
         return res.send(articles);
       }
 
-      Article.find({})
+      Article.find({ published: true })
         .sort({ createdAt: -1 })
+        .select('url name createdAt')
         .exec((err, docs) => {
           if (err) return next(err);
 
